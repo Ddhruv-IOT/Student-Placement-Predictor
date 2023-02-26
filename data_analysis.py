@@ -11,6 +11,9 @@ from utils import legend
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
+from PIL import Image
+
+image = Image.open('./assets/images.png')
 
 df = pd.read_csv("./assets/Placement_Data_Full_Class.csv")
 
@@ -220,31 +223,86 @@ def data_visualization():
     md_runner("<br/>")
 
 
-    md_runner("<h1>Board Type vs Placements </h1>")
-    fig2 = plt.figure(figsize=(5, 3))
+    md_runner("<h1> 10th Board Type vs Placements </h1>")
+    fig, ax = plt.subplots(figsize=(18, 10))
 
-    # dt = df.groupby(["ssc_b", "status"]).size().groupby(level=0).apply(
-    #     lambda x: 100 * x / x.sum()).unstack()
-
-    # # .plot(kind='bar', stacked=True)
-    # plt.bar(dt, stacked=True)
-    # plt.legend(loc='upper right', title='Board of Education')
-    # st.pyplot(fig2)
+    df.groupby(["ssc_b", "status"]).size().groupby(level=0).apply(
+        lambda x: 100 * x / x.sum()).unstack().plot(kind='bar', stacked=True,
+                                                    ax=ax)
+    plt.legend(loc='upper right', title='Board of Education')
+    st.pyplot(fig)
 
     md_runner("<b><u>Conclusion</u>:</b> There is no major differnce if you had given your class 10th boards from central board or others.")
     md_runner("<br/>")
 
-    fig, ax = plt.subplots()
 
-    pl = df.groupby(["hsc_s","status"]).size().groupby(level=0).apply(
-    lambda x: 100 * x / x.sum()
-).unstack().plot(kind='bar',stacked=True, fig=ax)
+    md_runner("<h1>12th Board Type vs Placements </h1>")
+    fig, ax = plt.subplots(figsize=(18, 10))
 
-# plt.gca().yaxis.set_major_formatter(mtick.PercentFormatter())
-    plt.legend(loc = 'upper right',title = 'Higher Education Specialization')
-    st.pyplot(pl)
+    df.groupby(["hsc_b","status"]).size().groupby(level=0).apply(
+    lambda x: 100 * x / x.sum()).unstack().plot(kind='bar',stacked=True,
+                                                ax=ax)
+    plt.legend(loc='upper right', title='Board of Education')
+    st.pyplot(fig)
+
+    md_runner("<b><u>Conclusion</u>:</b> There is no major differnce if you had given your class 12th boards from central board or others.")
+    md_runner("<br/>")
 
 
+    md_runner("<h1>Specialization in Higher Education </h1>")
+    fig, ax = plt.subplots(figsize=(18, 10))
+
+    df.groupby(["hsc_s","status"]).size().groupby(level=0).apply(
+    lambda x: 100 * x / x.sum()).unstack().plot(kind='bar', stacked=True,
+                                                ax=ax)
+
+    plt.legend(loc='upper right', title='Higher Education Specialization')
+    st.pyplot(fig)
+
+    md_runner("<b><u>Conclusion</u>:</b> There is possibility that commerce and science are more likely to get placed.")
+    md_runner("<br/>")
+
+
+    md_runner("<h1>UG Degree vs Placements </h1>")
+    fig, ax = plt.subplots(figsize=(18, 10))
+
+    df.groupby(["degree_t","status"]).size().groupby(level=0).apply(
+    lambda x: 100 * x / x.sum()).unstack().plot(kind='bar', stacked=True,
+                                                ax=ax)
+
+    plt.legend(loc='upper right', title='Degree type')
+    st.pyplot(fig)
+
+    md_runner("<b><u>Conclusion</u>:</b> There is possibility that comm/management and sci/tech are more likely to get placed.")
+    md_runner("<br/>")
+
+
+    md_runner("<h1>Work Exp. vs Placements </h1>")
+    fig, ax = plt.subplots(figsize=(18, 10))
+
+    df.groupby(["workex","status"]).size().groupby(level=0).apply(
+    lambda x: 100 * x / x.sum()).unstack().plot(kind='bar', stacked=True,
+                                                ax=ax)
+
+    plt.legend(loc='upper right', title='Work experience')
+    st.pyplot(fig)
+
+    md_runner("<b><u>Conclusion</u>:</b> Having work experience is more likely to get placed.")
+    md_runner("<br/>")
+
+
+    md_runner("<h1>MBA Specialization </h1>")
+    fig, ax = plt.subplots(figsize=(18, 10))
+
+    df.groupby(["specialisation","status"]).size().groupby(level=0).apply(
+    lambda x: 100 * x / x.sum()).unstack().plot(kind='bar', stacked=True,
+                                                ax=ax)
+
+    plt.legend(loc='upper right', title='specialisation')
+    st.pyplot(fig)
+
+    md_runner("<b><u>Conclusion</u>:</b> Here, mrkt/finance are more likely to get placed than mrkt/hr.")
+    md_runner("<br/>")
 
 def data_page():
 
@@ -254,7 +312,7 @@ def data_page():
         "Select to explore ", main_opt)
 
     if selection == main_opt[0]:
-        st.write('Here you go')
+        st.image(image, caption='Campus Placements', width=700)
         data_exploration()
 
     elif selection == main_opt[1]:
