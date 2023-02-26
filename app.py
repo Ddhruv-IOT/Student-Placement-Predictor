@@ -5,6 +5,7 @@ from utils import md_runner
 from streamlit_option_menu import option_menu
 from data_analysis import data_page
 from home import home_page
+import model_run
 
 
 main_options = ["Home", 'Data Analysis', 'Model Prediction']
@@ -18,3 +19,6 @@ if selected == main_options[0]:
 
 if selected == main_options[1]:
     data_page()
+
+if selected == main_options[2]:
+    model_run.stip()
