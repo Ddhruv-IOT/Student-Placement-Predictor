@@ -1,0 +1,29 @@
+gender 
+M - 1
+F - 0
+
+ssc_b 
+central - 0
+others - 1
+
+hsc_b
+cen - 0
+others - 1
+
+hsc_s
+comm - 1
+sci - 2
+others - 0 
+
+deg_t
+sci - 2
+comm - 0
+othr - 1
+
+work
+Y - 1
+No - 0
+
+spl
+Mkt hr - 1
+mkt fin - 0

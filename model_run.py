@@ -86,7 +86,7 @@ def stip():
         if(Y_pred[0]):
             st.balloons()
             md_runner("<h2> Congrats!! your are eligible to be placed!!</h2>")
-            st.write(f"Stats for nerds: Predicted with acc. of {round(sc[0])*100}%")
+            st.write(f"Stats for nerds: Predicted with acc. of {round((sc[0]) * 100)}%")
 
         else:
             st.snow()
